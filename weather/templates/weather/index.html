@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport", content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Погодное приложение</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+		<h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+		<nav class="my-2 my-md-0 mr-md-3">
+			<a class="p-2 text-dark" href="">Features</a>
+			<a class="p-2 text-dark" href="#">Enterprise</a>
+			<a class="p-2 text-dark" href="#">Support</a>
+			<a class="p-2 text-dark" href="#">Pricing</a>
+		</nav>
+		<a class="modalbtn btn btn-outline-primary" href="#modal1" id="modalbtn" >Sign up</a>
+	</div>
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-5 offset-1">
+				<h1>Погода в городе</h1>
+				<form action="" method="post">
+					{% csrf_token %}					
+					<label for="city">Город</label>
+					{{form.name}}
+					<!-- <input type="text" id="city" class="form-control" name="city" placeholder="Введите город"> -->
+					<input type="submit" name="send" value="Узнать" class="btn btn-danger mt-2">
+				</form>
+				<div class="container mt-2">
+					{% load static %}
+					<img src={% static "01d.png" %} alt="My image">
+					<img src={% static "weather/50d.png" %} alt="My image">
+				</div>
+
+			</div>
+			<div class="col-4 offset-1">
+				<h1>Информация</h1>
+				<h4>Long Placeholder_____2</h4>
+
+				{% for info in all_info %}
+				<div class="alert alert-primary">
+					<div class="row">
+						<div class="col-9">
+							<b>Город:</b> {{info.city}} <br>
+							<b>Температура:</b> {{info.temp}} <sup>o</sup><br>
+						</div>
+						<div class="col-2 offset-1">
+							<img src="https://openweathermap.org/img/w/{{info.icon}}.png" alt="Картинка">
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				
+
+			</div>
+		</div>
+	</div>
+
+<div class="popup" id="modal1">
+	<div class="popup__overlay">
+		<div class="popup__body">
+			<a href="#" class="popup__close">
+				<i class="fas fa-window-close"></i>
+			</a>
+			<h3>Заголовок</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+</div>
+
+<script src={% static "script.js" %}></script>	
+</body>
+</html>
